@@ -1,0 +1,32 @@
+[build-system]
+requires = ["setuptools", "setuptools-scm"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "EBC-Measurements"
+authors = [
+    {name = "RWTH Aachen University, E.ON Energy Research Center, Institute for Energy Efficient Buildings and Indoor Climate", email = "ebc-tools@eonerc.rwth-aachen.de"},
+    {name = "Jun Jiang", email="jun.jiang@eonerc.rwth-aachen.de"}
+]
+description = "All-in-One Toolbox for Measurement Data Acquisition and Data Logging"
+readme = "README.md"
+requires-python = ">=3.10"
+keywords = ["measurement device", "data logger"]
+license = "MIT"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Operating System :: OS Independent",
+]
+dependencies = [
+    "pyserial~=3.5",
+    "pyads~=3.6.0",
+    "paho-mqtt~=2.1.0",
+    "pandas~=3.0.5"
+]
+dynamic = ["version"]
+
+[project.urls]
+"Repository" = "https://github.com/RWTH-EBC/EBC_Measurements"
+
+[tool.setuptools.dynamic]
+version = {attr = "ebcmeasurements.__version__"}

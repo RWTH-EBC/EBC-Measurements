@@ -4,6 +4,8 @@ from .Mqtt import MqttDataSourceOutput, MqttTheThingsNetwork
 from .Sensor_Electronic import SensoSysDataSource
 import logging
 
+__version__ = '1.3.1'
+
 try:
     from .Beckhoff import AdsDataSourceOutput
 except FileNotFoundError as e:
