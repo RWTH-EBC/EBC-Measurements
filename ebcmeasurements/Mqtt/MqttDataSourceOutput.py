@@ -123,6 +123,8 @@ class MqttDataSourceOutput(DataSourceOutput.DataSourceOutputBase):
             broker: str,
             port: int = 1883,
             keepalive: int = 60,
+            bind_address: str = '',
+            bind_port: int = 0,
             username: str = None,
             password: str = None,
             use_tls: bool = False,
@@ -136,6 +138,8 @@ class MqttDataSourceOutput(DataSourceOutput.DataSourceOutputBase):
         :param broker: See package paho.mqtt.client
         :param port: See package paho.mqtt.client
         :param keepalive: See package paho.mqtt.client
+        :param bind_address: See package paho.mqtt.client
+        :param bind_port: See package paho.mqtt.client
         :param username: See package paho.mqtt.client
         :param password: See package paho.mqtt.client
         :param use_tls: Boolean flag if TLS encryption should be used
@@ -155,6 +159,8 @@ class MqttDataSourceOutput(DataSourceOutput.DataSourceOutputBase):
         self.broker = broker
         self.port = port
         self.keepalive = keepalive
+        self.bind_address = bind_address
+        self.bind_port = bind_port
 
         # Config MQTT
         super().__init__()
@@ -220,7 +226,7 @@ class MqttDataSourceOutput(DataSourceOutput.DataSourceOutputBase):
         """Try to connect to MQTT broker only once"""
         try:
             logger.info(f"Connecting to broker: {self.broker} ...")
-            self.system.connect(self.broker, self.port, self.keepalive)  # Connect MQTT
+            self.system.connect(self.broker, self.port, self.keepalive, self.bind_address, self.bind_port)  # Connect MQTT
             mqtt_thread = threading.Thread(target=self._mqtt_loop_forever)
             mqtt_thread.start()
             logger.info(f"MQTT loop started")

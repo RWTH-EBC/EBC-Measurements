@@ -57,6 +57,8 @@ class MqttTheThingsNetwork(MqttDataSourceOutput.MqttDataSourceOutput):
             broker: str = 'eu1.cloud.thethings.network',
             port: int = 1883,
             keepalive: int = 60,
+            bind_address: str = '',
+            bind_port: int = 0,
             username: str = None,
             password: str = None,
             device_ids: list[str] = None,
@@ -69,6 +71,8 @@ class MqttTheThingsNetwork(MqttDataSourceOutput.MqttDataSourceOutput):
         :param broker: MQTT broker of TheThingsNetwork
         :param port: See package paho.mqtt.client
         :param keepalive: See package paho.mqtt.client
+        :param bind_address: See package paho.mqtt.client
+        :param bind_port: See package paho.mqtt.client
         :param username: The username used for connecting, formatted as {application id}@{tenant id}
         :param password: The password used for connecting, must be generated in TTN under 'API Keys'
         :param device_ids: List of device IDs to connect to, the ID must match the one in "End devices - General
@@ -110,6 +114,8 @@ class MqttTheThingsNetwork(MqttDataSourceOutput.MqttDataSourceOutput):
             broker=broker,
             port=port,
             keepalive=keepalive,
+            bind_address=bind_address,
+            bind_port=bind_port,
             username=username,
             password=password,
             subscribe_topics=[rf'v3/{username}/devices/{device_id}/up' for device_id in self.device_ids],
